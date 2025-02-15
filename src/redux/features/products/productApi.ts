@@ -3,10 +3,7 @@ import { baseApi } from "../../api/baseApi";
 const productsApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllProducts: builder.query<any[], void>({  
-            query: () => ({
-              url: '/products',
-              method: 'GET',
-            }),
+            query: () => '/products'
         }),
         getProductById: builder.query({
             query: (productId) => `/products/${productId}`,
