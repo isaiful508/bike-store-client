@@ -240,7 +240,7 @@ const AllProducts = () => {
         {/* Products Grid */}
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => (
-            <ProductsCard key={product.id} product={product} />
+            <ProductsCard key={product._id} product={product} />
           ))}
         </div>
 
