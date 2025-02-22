@@ -111,7 +111,7 @@ const ProductDetails = () => {
                 </button>
 
                 <Link
-                  to="/checkout"
+                  to={`/checkout/${id}`}
                   className="w-full flex items-center justify-center px-8 py-4 border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 text-lg font-medium rounded-lg transition-colors duration-200"
                 >
                   <svg className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
