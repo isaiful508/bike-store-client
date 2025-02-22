@@ -4,74 +4,41 @@ import { useForm } from 'react-hook-form';
 import { useGetProductByIdQuery } from '../../redux/features/products/productApi';
 import { useCurrentUser } from '../../redux/features/auth/authSlice';
 import { useAppSelector } from '../../redux/hooks';
-// import { z } from 'zod';
-// import { zodResolver } from '@hookform/resolvers/zod';
-
-// const checkoutSchema = z.object({
-//   fullName: z.string().min(2, 'Full name must be at least 2 characters'),
-//   email: z.string().email('Invalid email address'),
-//   phone: z.string().min(11, 'Phone number must be at least 11 characters'),
-//   address: z.string().min(10, 'Address must be at least 10 characters'),
-//   city: z.string().min(2, 'City must be at least 2 characters'),
-//   postalCode: z.string().min(4, 'Postal code must be at least 4 characters'),
-//   quantity: z.number().min(1, 'Quantity must be at least 1'),
-//   paymentMethod: z.enum(['surjopay']),
-// });
-
-// type CheckoutFormData = z.infer<typeof checkoutSchema>;
 
 const Checkout = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { id } = useParams();
-  const { data, error, isLoading } = useGetProductByIdQuery(id);
+  const { data} = useGetProductByIdQuery(id);
   const product = data?.data;
-  console.log({product});
-const user = useAppSelector(useCurrentUser);
-console.log({user});
+
+  const user = useAppSelector(useCurrentUser);
+
 
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
   } = useForm({
-    // resolver: zodResolver(checkoutSchema),
     defaultValues: {
-      quantity: 1,
-      paymentMethod: 'surjopay',
+      quantity: 1
     },
   });
 
   const quantity = watch('quantity');
   const total = product?.price * quantity;
 
-  const onSubmit = async (data: CheckoutFormData) => {
-    try {
-      setIsProcessing(true);
-
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      navigate('/order-success', { 
-        state: { 
-          orderDetails: {
-            ...data,
-            product: {
-              name: "Mountain Explorer X1",
-              price: productPrice,
-              image: "https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-            },
-            total,
-            orderId: Math.random().toString(36).substr(2, 9)
-          }
-        }
-      });
-    } catch (error) {
-      alert('Payment failed. Please try again.');
-    } finally {
-      setIsProcessing(false);
-    }
+  const onSubmit = async (data: any) => {
+    // setIsProcessing(true);
+    const payload = {
+      user: user?.id,
+      products: {
+        product: product?._id,
+        quantity: data.quantity,
+      },
+    };
+    console.log(payload);
   };
 
   return (
@@ -89,15 +56,15 @@ console.log({user});
               <div className="flex-shrink-0 w-24 h-24 bg-gray-100 rounded-lg overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                  alt={product.name}
+                  alt={product?.name}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="ml-6 flex-1">
-                <h3 className="text-lg font-medium text-gray-900">{product.name}</h3>
-                <p className="mt-1 text-sm text-gray-500">{product.brand}</p>
-                <p className="mt-1 text-sm text-gray-500">{product.category}</p>
-                <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
+                <h3 className="text-lg font-medium text-gray-900">{product?.name}</h3>
+                <p className="mt-1 text-sm text-gray-500">{product?.brand}</p>
+                <p className="mt-1 text-sm text-gray-500">{product?.category}</p>
+                <p className="mt-1 text-lg font-medium text-gray-900">${product?.price}</p>
               </div>
             </div>
           </div>
@@ -115,12 +82,9 @@ console.log({user});
                 </label>
                 <input
                   type="text"
-                  {...register('fullName')}
+                  value={user?.name}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.fullName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
-                )}
               </div>
 
               <div>
@@ -129,12 +93,10 @@ console.log({user});
                 </label>
                 <input
                   type="email"
+                  value={user?.email}
                   {...register('email')}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                )}
               </div>
 
               <div>
@@ -143,12 +105,9 @@ console.log({user});
                 </label>
                 <input
                   type="tel"
-                  {...register('phone')}
+                  value={user?.phone}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-                )}
               </div>
 
               <div className="sm:col-span-2">
@@ -157,12 +116,9 @@ console.log({user});
                 </label>
                 <input
                   type="text"
-                  {...register('address')}
+                  value={user?.address}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.address && (
-                  <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>
-                )}
               </div>
 
               <div>
@@ -171,28 +127,10 @@ console.log({user});
                 </label>
                 <input
                   type="text"
-                  {...register('city')}
+                  value={user?.city}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.city && (
-                  <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
-                )}
               </div>
-
-              <div>
-                <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
-                  Postal Code
-                </label>
-                <input
-                  type="text"
-                  {...register('postalCode')}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                />
-                {errors.postalCode && (
-                  <p className="mt-1 text-sm text-red-600">{errors.postalCode.message}</p>
-                )}
-              </div>
-
               {/* Order Details */}
               <div className="sm:col-span-2 mt-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Order Details</h3>
@@ -204,13 +142,10 @@ console.log({user});
                 </label>
                 <input
                   type="number"
-                  {...register('quantity', { valueAsNumber: true })}
                   min="1"
+                  {...register('quantity', { valueAsNumber: true })}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
-                {errors.quantity && (
-                  <p className="mt-1 text-sm text-red-600">{errors.quantity.message}</p>
-                )}
               </div>
 
               {/* Payment Method */}
@@ -220,7 +155,6 @@ console.log({user});
                   <div className="flex items-center">
                     <input
                       type="radio"
-                      {...register('paymentMethod')}
                       value="surjopay"
                       className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300"
                       checked
@@ -238,15 +172,15 @@ console.log({user});
               <div className="sm:col-span-2 mt-6">
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Order Summary</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
-                 
-                  
-                    <div className="border-t border-gray-200 pt-2 mt-2">
-                      <div className="flex justify-between">
-                        <span className="text-lg font-medium text-gray-900">Total</span>
-                        <span className="text-lg font-medium text-gray-900">${total.toFixed(2)}</span>
-                      </div>
+
+
+                  <div className="border-t border-gray-200 pt-2 mt-2">
+                    <div className="flex justify-between">
+                      <span className="text-lg font-medium text-gray-900">Total</span>
+                      <span className="text-lg font-medium text-gray-900">${total.toFixed(2)}</span>
                     </div>
-             
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -256,9 +190,8 @@ console.log({user});
               <button
                 type="submit"
                 disabled={isProcessing}
-                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${
-                  isProcessing ? 'opacity-75 cursor-not-allowed' : ''
-                }`}
+                className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ${isProcessing ? 'opacity-75 cursor-not-allowed' : ''
+                  }`}
               >
                 {isProcessing ? (
                   <>
