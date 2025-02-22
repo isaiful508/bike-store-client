@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useGetProductByIdQuery } from '../../redux/features/products/productApi';
 import { useCurrentUser } from '../../redux/features/auth/authSlice';
 import { useAppSelector } from '../../redux/hooks';
+import { useCreateOrderMutation } from '../../redux/features/orders/orderApi';
 
 const Checkout = () => {
   const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { id } = useParams();
-  const { data} = useGetProductByIdQuery(id);
+  const { data } = useGetProductByIdQuery(id);
   const product = data?.data;
 
   const user = useAppSelector(useCurrentUser);
+  const [createOrder, {data: order, isSuccess, isLoading}] = useCreateOrderMutation();
+  console.log({order});
 
+  useEffect(() => {
+    if(isSuccess) {
+      if(order?.data) {
+        window.location.href = order?.data;
+      }
+    }
+  },[isLoading, isSuccess, order?.data]);
 
   const {
     register,
@@ -30,14 +40,27 @@ const Checkout = () => {
   const total = product?.price * quantity;
 
   const onSubmit = async (data: any) => {
-    // setIsProcessing(true);
+
     const payload = {
-      user: user?.id,
-      products: {
-        product: product?._id,
-        quantity: data.quantity,
+      data: {
+        user: user?.id,
+        products: [
+          {
+            product: product?._id,
+            quantity: data.quantity,
+          }
+        ]
       },
     };
+    try {
+      setIsProcessing(true);
+      await createOrder(payload).unwrap();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsProcessing(false);
+    }
+
     console.log(payload);
   };
 

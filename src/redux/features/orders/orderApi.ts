@@ -9,9 +9,13 @@ const ordersApi = baseApi.injectEndpoints({
                 body: orderData,
             }),
         }),
-        verifyPayment: builder.query({
-            query: (orderId) => `/order/verify?order_id=${orderId}`,
-        }),
+        verifyOrder: builder.query({
+            query: (order_id) => ({
+              url: "/order/verify",
+              params: { order_id },
+              method: "GET",
+            }),
+          }),
         getTotalRevenue: builder.query({
             query: () => "/orders/revenue",
         }),
@@ -23,7 +27,7 @@ const ordersApi = baseApi.injectEndpoints({
 
 export const {
     useCreateOrderMutation,
-    useVerifyPaymentQuery,
+    useVerifyOrderQuery,
     useGetTotalRevenueQuery,
     useGetAllOrdersQuery,
 } = ordersApi;

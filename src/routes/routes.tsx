@@ -7,6 +7,7 @@ import AllProducts from "../pages/AllProducts/AllProducts";
 import About from "../pages/About/About";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Checkout from "../pages/Checkout/Checkout";
+import VerifyOrder from "../pages/VerifyOrder/VerifyOrder";
 
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
                 path : '/checkout/:id',
                 element: <Checkout/>
             },
+            {
+                path : 'order/verify',
+                element: <VerifyOrder/>
+            }
             
         ]
     },
