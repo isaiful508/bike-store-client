@@ -8,6 +8,8 @@ import About from "../pages/About/About";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import Checkout from "../pages/Checkout/Checkout";
 import VerifyOrder from "../pages/VerifyOrder/VerifyOrder";
+import DashboardLayout from "../components/Layouts/DashboardLayout";
+import AddProduct from "../pages/Dashboard/AddProduct/AddProduct";
 
 
 const router = createBrowserRouter([
@@ -50,7 +52,34 @@ const router = createBrowserRouter([
     {
         path : '/register',
         element : <Register/> 
-     }
+     },
+     // Dashboard route
+    {
+        path: '/dashboard',
+        element: <DashboardLayout />,
+        children: [
+            {
+                path: '/dashboard/add_product',
+                element: <AddProduct />
+            },
+            // {
+            //     path: '/dashboard/my_profile',
+            //     element: <MyProfile />
+            // },
+            // {
+            //     path: '/dashboard/manage_orders',
+            //     element: <ManageOrders />
+            // },
+            // {
+            //     path: '/dashboard/manage_users',
+            //     element: <ManageUsers />
+            // },
+            // {
+            //     path: '/dashboard/manage_product',
+            //     element: <Products />
+            // },
+        ] // Keep this if you plan to add nested routes inside Dashboard
+    }
 ]);
 
 export default router;

@@ -46,43 +46,6 @@ const VerifyOrder = () => {
   });
   console.log({data});
   const orderData: OrderData = data?.data?.[0];
-  const handleVerify = () => {
-    // Handle verify order
-  };
-
-  // const orderData: OrderData = {
-  //   id: 1,
-  //   order_id: "123456",
-  //   currency: "BDT",
-  //   amount: 1000,
-  //   payable_amount: 1000,
-  //   discsount_amount: null,
-  //   disc_percent: 0,
-  //   received_amount: "1000.00",
-  //   usd_amt: 11.76,
-  //   usd_rate: 85.00,
-  //   is_verify: 0,
-  //   card_holder_name: null,
-  //   card_number: null,
-  //   phone_no: "01711111111",
-  //   bank_trx_id: "123456",
-  //   invoice_no: "123456",
-  //   bank_status: "Success",
-  //   customer_order_id: "123456",
-  //   sp_code: "000",
-  //   sp_message: "Success",
-  //   name: "John Doe",
-  //   email: "",
-  //   address: "1234 Main St",
-  //   city: "Dhaka",
-  //   value1: null,
-  //   value2: null,
-  //   value3: null,
-  //   value4: null,
-  //   transaction_status: null,
-  //   method: "bKash",
-  //   date_time: "2021-09-01 12:00:00",
-  // };
   
   return (
     isLoading ? <Skeleton/> :
