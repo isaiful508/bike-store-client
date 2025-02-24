@@ -2,9 +2,22 @@ import {  useGetAllProductsQuery} from "../../redux/features/products/productApi
 import ProductsCard from '../../components/ProductsCard/ProductsCard';
 import { useMemo, useState } from "react";
 
+type IProduct = {
+  _id: string;
+  name: string;
+  brand: string;
+  price: number;
+  category: "Mountain" | "Road" | "Hybrid" | "Electric";
+  description: string;
+  quantity: number;
+  inStock: boolean;
+  image?: string;
+}
 const AllProducts = () => {
   const { data: products, error, isLoading } = useGetAllProductsQuery();
-  const items = products?.data;
+  // const items = products?.data ;
+  //@ts-ignore
+  const items: IProduct[] = products?.data ?? [];
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     priceRange: 'all',
@@ -238,8 +251,10 @@ const AllProducts = () => {
         </div>
 
         {/* Products Grid */}
+  
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => (
+            //@ts-ignore
             <ProductsCard key={product._id} product={product} />
           ))}
         </div>

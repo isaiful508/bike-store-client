@@ -4,7 +4,8 @@ import { useCurrentUser } from "../../redux/features/auth/authSlice";
 
 
 const DashboardLayout = () => {
-    const user = useAppSelector(useCurrentUser)
+    const user = useAppSelector(useCurrentUser);
+    //@ts-ignore
     const isAdmin = user?.role
     return (
         <div className="flex container mx-auto min-h-screen">

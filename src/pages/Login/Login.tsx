@@ -20,10 +20,10 @@ const Login = () => {
         }
       });
 
-      const [login, { error}] = useLoginMutation();
+      const [login] = useLoginMutation();
 
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data : any) => {
         const userInfo = {
           email : data.email,
           password : data.password

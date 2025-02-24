@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Bike, DollarSign, Package, ShoppingCart, Tag, Type } from "lucide-react";
@@ -108,14 +107,14 @@ const AddProduct = () => {
               </label>
               <select
                 {...register("category")}
-                className={`w-full px-3 py-2 border ${errors.type ? "border-red-500" : "border-gray-300"} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="Road">Road</option>
                 <option value="Mountain">Mountain</option>
                 <option value="Hybrid">Hybrid</option>
                 <option value="Electric">Electric</option>
               </select>
-              {errors.type && <p className="text-sm text-red-500">{errors.type.message}</p>}
+              {/* {errors.type && <p className="text-sm text-red-500">{errors.type.message}</p>} */}
             </div>
 
             {/* Description */}

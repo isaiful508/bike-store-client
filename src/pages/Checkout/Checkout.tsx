@@ -1,20 +1,34 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useGetProductByIdQuery } from '../../redux/features/products/productApi';
 import { useCurrentUser } from '../../redux/features/auth/authSlice';
 import { useAppSelector } from '../../redux/hooks';
 import { useCreateOrderMutation } from '../../redux/features/orders/orderApi';
 
+
+export type IUser = {
+  id?: string;
+  name: string;
+  email: string;
+  password: string;
+  role: "customer" | "admin";
+  phone?: string;
+  address?: string;
+  city?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
 const Checkout = () => {
-  const navigate = useNavigate();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const { id } = useParams();
   const { data } = useGetProductByIdQuery(id);
   const product = data?.data;
 
-  const user = useAppSelector(useCurrentUser);
+  // const user = useAppSelector(useCurrentUser);
+  const user: IUser | null = useAppSelector(useCurrentUser) as IUser | null;
   const [createOrder, {data: order, isSuccess, isLoading}] = useCreateOrderMutation();
   console.log({order});
 
@@ -43,7 +57,7 @@ const Checkout = () => {
 
     const payload = {
       data: {
-        user: user?.id,
+        user: user?.id ?? "",
         products: [
           {
             product: product?._id,
@@ -117,7 +131,6 @@ const Checkout = () => {
                 <input
                   type="email"
                   value={user?.email}
-                  {...register('email')}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 />
               </div>
