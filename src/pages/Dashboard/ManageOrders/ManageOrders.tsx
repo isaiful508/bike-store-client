@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Package, Search, Filter, ChevronDown, ArrowUpDown, Edit, Trash2, Plus, X, Check } from 'lucide-react';
+import { useState } from 'react';
+import { Package, Search, Filter, ChevronDown, ArrowUpDown, Edit, Trash2, X, Check } from 'lucide-react';
 
 interface Order {
     id: string;
