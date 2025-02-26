@@ -27,10 +27,10 @@ const Navbar = () => {
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+                src="https://i.ibb.co.com/DfKgNLx6/bikelogo.png"
                 alt="Logo"
               />
-              <span className="ml-2 text-xl font-bold text-gray-800">BikeShop</span>
+              <span className="ml-2 text-xl font-bold text-gray-800">Bike Nest</span>
             </Link>
 
             {/* Desktop Navigation */}

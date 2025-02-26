@@ -13,7 +13,14 @@ const authApi = baseApi.injectEndpoints({
           body: { isActive }, // Send new status in request body
       }),
     }),
+    updateUser: builder.mutation({
+      query: ({ UserId, updatedUser }) => ({
+          url: `/user/update/${UserId}`,
+          method: "PUT",
+          body: updatedUser,
+      }),
+  }),
   }),
 });
 
-export const { useGetAllUserQuery, useToggleUserStatusMutation } = authApi;
+export const { useGetAllUserQuery, useToggleUserStatusMutation, useUpdateUserMutation } = authApi;
