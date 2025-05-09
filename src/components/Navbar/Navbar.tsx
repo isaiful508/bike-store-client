@@ -5,8 +5,9 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
 
-   const navLinks = [
+  const navLinks = [
     { path: "/", label: "Home" },
     { path: "/products", label: "All Products" },
     { path: "/dashboard", label: "Dashboard" },
@@ -27,6 +28,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-indigo-600/70 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
+          {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center">
               <img
@@ -37,7 +39,8 @@ const Navbar = () => {
               <span className="ml-2 text-xl font-bold text-white">Bike Nest</span>
             </Link>
 
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            {/* Desktop Links */}
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -47,9 +50,48 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
+
+              {/* All Bikes Mega Menu */}
+              <div
+                className="relative group"
+                onMouseEnter={() => setIsSubmenuOpen(true)}
+                onMouseLeave={() => setIsSubmenuOpen(false)}
+              >
+                <button className="text-white hover:text-gray-200 inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 text-sm font-medium">
+                  All Bikes
+                  <svg
+                    className="ml-1 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Submenu */}
+                <div
+                  className={`absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50 py-1 ${
+                    isSubmenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                  } transition-opacity duration-200`}
+                  onMouseEnter={() => setIsSubmenuOpen(true)} // Keep submenu open when hovering over it
+                  onMouseLeave={() => setIsSubmenuOpen(false)} // Close submenu when mouse leaves it
+                >
+                  <Link to="/category/mountain" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Mountain
+                  </Link>
+                  <Link to="/category/road" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Road
+                  </Link>
+                  <Link to="/category/hybrid" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Hybrid
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
 
+          {/* Right Actions */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             <button className="bg-transparent p-1 rounded-full text-white hover:text-gray-200 focus:outline-none">
               <span className="sr-only">Search</span>
@@ -84,6 +126,7 @@ const Navbar = () => {
             </div>
           </div>
 
+          {/* Mobile Hamburger */}
           <div className="flex items-center sm:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -110,6 +153,8 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu */}
       <div className={`${isMenuOpen ? 'block' : 'hidden'} sm:hidden bg-indigo-600/90 backdrop-blur-md`}>
         <div className="pt-2 pb-3 space-y-1 px-4">
           {navLinks.map((link) => (
@@ -122,6 +167,15 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
+          {/* Mobile submenu - optional */}
+          <div className="mt-2">
+            <p className="text-white font-semibold px-3">All Bikes</p>
+            <div className="pl-4 space-y-1">
+              <Link to="/category/mountain" className="block text-white hover:text-gray-200">Mountain</Link>
+              <Link to="/category/road" className="block text-white hover:text-gray-200">Road</Link>
+              <Link to="/category/hybrid" className="block text-white hover:text-gray-200">Hybrid</Link>
+            </div>
+          </div>
         </div>
         <div className="pt-4 pb-3 border-t border-indigo-500 px-4">
           {!user ? (
