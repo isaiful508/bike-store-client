@@ -15,8 +15,10 @@ interface User {
     updatedAt: string;
 }
 const MyProfile = () => {
-    const user: User = useSelector(useCurrentUser);
-    const { data: users = [], isLoading, refetch } = useGetAllUserQuery();
+    //@ts-ignore
+      const user: User = useSelector(useCurrentUser);
+
+    const { data: users = [] } = useGetAllUserQuery();
 
     const [updateUser] = useUpdateUserMutation();
     const [currentPassword, setCurrentPassword] = useState('');
@@ -27,6 +29,7 @@ const MyProfile = () => {
     const [userId, setUserId] = useState<string | null>(null);
  
     useEffect(() => {
+        //@ts-ignore
             const matchedUser = users?.data?.find(u => u?.email === user?.email);
             console.log(matchedUser);
             if (matchedUser) {
