@@ -62,7 +62,7 @@ const [current, setCurrent] = useState(0);
   }, [current, autoplay]);
   
   return (
-    <div className="relative h-[85vh] overflow-hidden mt-16">
+    <div className="relative h-[85vh] overflow-hidden mt-[97px]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}

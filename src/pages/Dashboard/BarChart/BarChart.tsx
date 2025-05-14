@@ -77,6 +77,7 @@ const BarChart = ({ title, data, height = 300 }: BarChartProps) => {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
       <div style={{ height: `${height}px` }}>
+         {/* @ts-ignore */}
         <Bar options={options} data={data} />
       </div>
     </div>
