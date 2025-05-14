@@ -16,6 +16,8 @@ import ManageOrders from "../pages/Dashboard/ManageOrders/ManageOrders";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import Contact from "../components/Contact/Contact";
 import Overview from "../pages/Dashboard/Overview/Overview";
+import ProtectedRoute from "../components/Layouts/ProtectedRoute";
+import AdminRoute from "./AdminRoute";
 
 
 const router = createBrowserRouter([
@@ -45,11 +47,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <Checkout />
+                element: <ProtectedRoute><Checkout /></ProtectedRoute>
             },
             {
                 path: 'order/verify',
-                element: <VerifyOrder />
+                element: <ProtectedRoute><VerifyOrder /></ProtectedRoute> 
             }
 
         ]
@@ -66,7 +68,7 @@ const router = createBrowserRouter([
     // Dashboard route
     {
         path: '/dashboard',
-        element: <DashboardLayout />,
+        element:<ProtectedRoute><DashboardLayout /></ProtectedRoute>,
         children: [
             {
                 path: '/dashboard',
@@ -74,23 +76,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/add_product',
-                element: <AddProduct />
+                element: <AdminRoute><AddProduct /></AdminRoute>
             },
             {
                 path: '/dashboard/my_profile',
-                element: <MyProfile />
+                element: <ProtectedRoute><MyProfile /></ProtectedRoute>
             },
             {
                 path: '/dashboard/manage_orders',
-                element: <ManageOrders />
+                element: <AdminRoute><ManageOrders /></AdminRoute>
             },
             {
                 path: '/dashboard/manage_users',
-                element: <ManageUsers />
+                element: <AdminRoute><ManageUsers /></AdminRoute>
             },
             {
                 path: '/dashboard/manage_product',
-                element: <Products />
+                element: <AdminRoute><Products /></AdminRoute>
             },
         ] // Keep this if you plan to add nested routes inside Dashboard
     }
