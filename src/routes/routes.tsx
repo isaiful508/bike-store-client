@@ -15,6 +15,7 @@ import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import ManageOrders from "../pages/Dashboard/ManageOrders/ManageOrders";
 import MyProfile from "../pages/Dashboard/MyProfile/MyProfile";
 import Contact from "../components/Contact/Contact";
+import Overview from "../pages/Dashboard/Overview/Overview";
 
 
 const router = createBrowserRouter([
