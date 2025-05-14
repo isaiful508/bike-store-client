@@ -56,14 +56,13 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 mt-16">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* Left Column - Image */}
             <div className="relative h-96 md:h-[600px] bg-gray-100">
               <img
-                src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                src={product.image}
                 alt={product.name}
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -74,11 +73,11 @@ const ProductDetails = () => {
               </div>
             </div>
 
-            {/* Right Column - Product Details */}
+            {/* Product Details */}
             <div className="p-8 md:p-12">
-              <div className="mb-8">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">{product.name}</h1>
-                <div className="flex items-center space-x-4 mb-4">
+              <div className="mb-4">
+                <h1 className="text-4xl font-semibold text-gray-900 mb-2">{product.name}</h1>
+                <div className="flex items-center space-x-4 mb-2">
                   <span className="text-lg font-medium text-gray-600">By {product.brand}</span>
                   <span className="h-1 w-1 rounded-full bg-gray-300"></span>
                   <span className="text-lg font-medium text-gray-600">{product.category}</span>
@@ -86,9 +85,9 @@ const ProductDetails = () => {
                 <p className="text-gray-600 text-lg leading-relaxed">{product.description}</p>
               </div>
 
-              <div className="mb-8">
-                <div className="flex items-baseline mb-4">
-                  <span className="text-5xl font-bold text-gray-900">${product.price}</span>
+              <div className="mb-4">
+                <div className="flex items-baseline mb-2">
+                  <span className="text-3xl font-medium text-gray-900">${product.price}</span>
                   <span className="ml-4 text-lg text-gray-500">USD</span>
                 </div>
                 <div className="flex items-center space-x-2">
@@ -99,16 +98,8 @@ const ProductDetails = () => {
                 </div>
               </div>
 
+              {/* Buy Now Only */}
               <div className="space-y-4">
-                <button
-                  className="w-full flex items-center justify-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-medium rounded-lg shadow-lg transition-colors duration-200"
-                >
-                  <svg className="w-6 h-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                  </svg>
-                  Add to Cart
-                </button>
-
                 <Link
                   to={`/checkout/${id}`}
                   className="w-full flex items-center justify-center px-8 py-4 border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 text-lg font-medium rounded-lg transition-colors duration-200"
@@ -120,6 +111,7 @@ const ProductDetails = () => {
                 </Link>
               </div>
 
+              {/* Features */}
               <div className="mt-12 border-t border-gray-200 pt-8">
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
                 <ul className="space-y-4">
