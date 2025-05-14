@@ -25,7 +25,7 @@ const slides: Slide[] = [
     title: "Ride the Road",
     subtitle: "Velocity S7",
     description: "Lightweight carbon road bike with aerodynamic design and premium components for exceptional performance.",
-    image: "https://images.pexels.com/photos/2458552/pexels-photo-2458552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "https://i.postimg.cc/26JsnmFX/pexels-pixabay-276517.jpg",
     buttonText: "Shop Road Bikes",
     buttonLink: "/category/road-bikes"
   },
@@ -33,7 +33,7 @@ const slides: Slide[] = [
     title: "Power Your Journey",
     subtitle: "Trailblazer Pro",
     description: "Electric mountain bike with mid-drive motor and full suspension for extended trail riding and maximum enjoyment.",
-    image: "https://images.pexels.com/photos/4554348/pexels-photo-4554348.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "https://plus.unsplash.com/premium_photo-1678718713393-2b88cde9605b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     buttonText: "Shop Electric Bikes",
     buttonLink: "/category/electric-bikes"
   }
@@ -62,7 +62,7 @@ const [current, setCurrent] = useState(0);
   }, [current, autoplay]);
   
   return (
-    <div className="relative h-[80vh] overflow-hidden mt-16">
+    <div className="relative h-[85vh] overflow-hidden mt-16">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}

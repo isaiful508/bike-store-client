@@ -109,7 +109,6 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../../pages/Dashboard/Sidebar/Sidebar';
 import Navbar from '../../pages/Dashboard/Navbar/Navbar';
-import Overview from '../../pages/Dashboard/Overview/Overview';
 
 
 const DashboardLayout = () => {
@@ -129,7 +128,6 @@ const DashboardLayout = () => {
         <main className={`flex-1 p-6 transition-all duration-300 ${sidebarOpen ? 'md:ml-64' : 'md:ml-20'}`}>
           <div className="max-w-7xl mx-auto">
             <Outlet />
-            <Overview/>
           </div>
         </main>
       </div>

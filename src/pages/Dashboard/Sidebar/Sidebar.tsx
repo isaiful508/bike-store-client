@@ -105,7 +105,7 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
             {isOpen && <span>My Profile</span>}
           </NavLink>
 
-          {/* Admin and Vendor routes */}
+          {/* @ts-ignore */}
           {(user?.role === 'admin' || user?.role === 'vendor') && (
             <>
               <NavLink
@@ -152,7 +152,7 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
             </>
           )}
 
-          {/* Admin-only routes */}
+          {/* @ts-ignore */}
           {user?.role === 'admin' && (
             <>
               <NavLink
@@ -169,50 +169,9 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
                 {isOpen && <span>Users</span>}
               </NavLink>
 
-              <NavLink
-                to="/reports"
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? 'bg-indigo-800 text-white'
-                      : 'text-indigo-100 hover:bg-indigo-600'
-                  } ${!isOpen && 'justify-center'}`
-                }
-              >
-                <BarChart2 className={`h-5 w-5 ${isOpen ? 'mr-3' : ''}`} />
-                {isOpen && <span>Reports</span>}
-              </NavLink>
-
-              <NavLink
-                to="/settings"
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? 'bg-indigo-800 text-white'
-                      : 'text-indigo-100 hover:bg-indigo-600'
-                  } ${!isOpen && 'justify-center'}`
-                }
-              >
-                <Settings className={`h-5 w-5 ${isOpen ? 'mr-3' : ''}`} />
-                {isOpen && <span>Settings</span>}
-              </NavLink>
             </>
           )}
 
-          {/* Help for all users */}
-          <NavLink
-            to="/help"
-            className={({ isActive }) =>
-              `flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
-                isActive
-                  ? 'bg-indigo-800 text-white'
-                  : 'text-indigo-100 hover:bg-indigo-600'
-              } ${!isOpen && 'justify-center'}`
-            }
-          >
-            <HelpCircle className={`h-5 w-5 ${isOpen ? 'mr-3' : ''}`} />
-            {isOpen && <span>Help & Support</span>}
-          </NavLink>
         </nav>
       </div>
     </div>
