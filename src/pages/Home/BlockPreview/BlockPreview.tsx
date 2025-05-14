@@ -41,7 +41,7 @@ const blogPosts = [
 
 const BlogPreview: React.FC = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white mt-12">
       <div className="container-custom">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Cycling Tips & Stories</h2>
@@ -101,7 +101,7 @@ const BlogPreview: React.FC = () => {
         </div>
         
         <div className="mt-10 text-center">
-          <Link to="/blog" className="btn-primary">
+          <Link to="/blog" className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200">
             View All Articles
           </Link>
         </div>

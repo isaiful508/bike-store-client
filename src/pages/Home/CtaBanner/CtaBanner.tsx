@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const CtaBanner: React.FC = () => {
   return (
-    <section className="py-20 bg-cover bg-center relative" style={{ backgroundImage: 'url(https://images.pexels.com/photos/38296/cycling-bicycle-riding-sport-38296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)' }}>
+    <section className="py-20 bg-cover bg-center relative mt-12" style={{ backgroundImage: 'url(https://images.pexels.com/photos/38296/cycling-bicycle-riding-sport-38296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)' }}>
       <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/90 to-indigo-800/70"></div>
       
       <div className="container-custom relative z-10">

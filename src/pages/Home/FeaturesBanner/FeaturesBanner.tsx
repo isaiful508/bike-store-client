@@ -27,7 +27,7 @@ const features = [
 
 const FeaturesBanner: React.FC = () => {
   return (
-    <section className="py-16 bg-white border-t border-b border-gray-200">
+    <section className="py-16 mt-12 bg-white border-t border-b border-gray-200">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (

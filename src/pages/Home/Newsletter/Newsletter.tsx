@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Newsletter: React.FC = () => {
   return (
-    <section className="py-16 bg-primary-50">
+    <section className="py-16 bg-primary-50 mt-12">
       <div className="container-custom">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
