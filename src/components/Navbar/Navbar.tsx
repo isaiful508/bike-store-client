@@ -6,18 +6,20 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
+  const user = useAppSelector(useCurrentUser);
 
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/products", label: "All Products" },
-    { path: "/dashboard", label: "Dashboard" },
+    ...(user ? [{ path: "/dashboard", label: "Dashboard" }] : []),
     { path: "/about_us", label: "About Us" },
     { path: "/contact_us", label: "Contact Us" },
   ];
 
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector(useCurrentUser);
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -71,9 +73,8 @@ const Navbar = () => {
 
                 {/* Submenu */}
                 <div
-                  className={`absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50 py-1 ${
-                    isSubmenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-                  } transition-opacity duration-200`}
+                  className={`absolute left-0 mt-2 w-40 bg-white rounded-md shadow-lg z-50 py-1 ${isSubmenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                    } transition-opacity duration-200`}
                   onMouseEnter={() => setIsSubmenuOpen(true)} // Keep submenu open when hovering over it
                   onMouseLeave={() => setIsSubmenuOpen(false)} // Close submenu when mouse leaves it
                 >

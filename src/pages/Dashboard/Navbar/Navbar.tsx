@@ -23,6 +23,7 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
 
   const handleLogout = () => {
     dispatch(logout());
+    navigate("/login");
   };
 
   // Close dropdowns when clicking outside
@@ -53,9 +54,9 @@ const Navbar = ({ toggleSidebar }: NavbarProps) => {
             >
               <Menu className="h-6 w-6" />
             </button>
-            <Link to="/" className="flex items-center ml-4">
+            <div className="flex items-center ml-4">
               <span className="text-indigo-600 font-semibold text-xl">Dashboard</span>
-            </Link>
+            </div>
           </div>
 
           <div className="flex items-center space-x-4">

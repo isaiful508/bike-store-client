@@ -7,12 +7,8 @@ import {
   Users, 
   ShoppingCart, 
   Package, 
-  BarChart2, 
-  Settings, 
-  HelpCircle, 
   User, 
   LayoutDashboard,
-  Boxes
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -22,10 +18,9 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
   const user = useAppSelector(useCurrentUser);
-  console.log(user);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  // Close sidebar when clicking outside on mobile
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -44,7 +39,6 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
     };
   }, [isOpen, closeSidebar]);
 
-  // Close sidebar on route change on mobile
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768 && isOpen) {
@@ -67,7 +61,7 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
         isOpen ? '64' : '20'
       }`}
     >
-      <div className={`flex flex-col h-full overflow-y-auto ${isOpen ? 'w-64' : 'md:w-20'}`}>
+      <div className={`flex flex-col h-full overflow-y-auto ${isOpen ? 'w-40' : 'md:w-20'}`}>
         <div className={`flex items-center justify-center h-16 ${isOpen ? 'px-6' : 'px-2'}`}>
           <NavLink to="/" className="flex items-center">
             <LayoutDashboard className="h-8 w-8 text-indigo-300" />
@@ -106,7 +100,7 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
           </NavLink>
 
           {/* @ts-ignore */}
-          {(user?.role === 'admin' || user?.role === 'vendor') && (
+          {(user?.role === 'admin') && (
             <>
               <NavLink
                 to="/dashboard/add_product"
@@ -135,26 +129,6 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
                 <Package className={`h-5 w-5 ${isOpen ? 'mr-3' : ''}`} />
                 {isOpen && <span>Orders</span>}
               </NavLink>
-
-              <NavLink
-                to="/inventory"
-                className={({ isActive }) =>
-                  `flex items-center px-4 py-3 text-sm font-medium rounded-md transition-colors ${
-                    isActive
-                      ? 'bg-indigo-800 text-white'
-                      : 'text-indigo-100 hover:bg-indigo-600'
-                  } ${!isOpen && 'justify-center'}`
-                }
-              >
-                <Boxes className={`h-5 w-5 ${isOpen ? 'mr-3' : ''}`} />
-                {isOpen && <span>Inventory</span>}
-              </NavLink>
-            </>
-          )}
-
-          {/* @ts-ignore */}
-          {user?.role === 'admin' && (
-            <>
               <NavLink
                 to="/dashboard/manage_users"
                 className={({ isActive }) =>
@@ -171,7 +145,6 @@ const Sidebar = ({ isOpen, closeSidebar }: SidebarProps) => {
 
             </>
           )}
-
         </nav>
       </div>
     </div>
